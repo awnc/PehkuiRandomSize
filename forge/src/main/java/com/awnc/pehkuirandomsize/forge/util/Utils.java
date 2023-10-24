@@ -28,7 +28,10 @@ public class Utils {
         ScaleTypes.MOTION.getScaleData(living).setScale(1/size);
         ScaleTypes.ATTACK_SPEED.getScaleData(living).setScale(1/size);
         if(Config.modifyHealth) {
-            Utils.setMaxHealth(living, living.getMaxHealth()*size,AttributeModifier.Operation.ADDITION );
+            if(size>1) Utils.setMaxHealth(living, living.getMaxHealth()*size,AttributeModifier.Operation.ADDITION );
+            else {ScaleTypes.HEALTH.getScaleData(living).setScaleTickDelay(0);
+                ScaleTypes.HEALTH.getScaleData(living).setTargetScale(size);
+                living.setHealth(living.getMaxHealth()*size);}
             }
         ScaleTypes.BASE.getScaleData(living).setScaleTickDelay(0);
         ScaleTypes.BASE.getScaleData(living).setTargetScale(size);

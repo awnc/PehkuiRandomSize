@@ -28,13 +28,13 @@ public class ConfigSpec {
             //factors
             builder.comment("Random Size Settings").push("size");
             builder.comment("Minimum size.Range (0,1)");
-            this.minLimit=builder.defineInRange("Minimum size",0.5,0,1);
+            this.minLimit=builder.defineInRange("Minimum size",0.75,0,1);
             builder.comment("Maximum size.Range (1,20)");
-            this.maxLimit=builder.defineInRange("Maximum size",2.0,1.0,20.0);
+            this.maxLimit=builder.defineInRange("Maximum size",1.5,1.0,20.0);
             builder.pop();
-            //Is increase health
-            builder.comment("Is increased Health").push("health");
-            this.modifyHealth=builder.define("Increase Health",true);
+            //Is modify health
+            builder.comment("Is modified Health").push("health");
+            this.modifyHealth=builder.define("Modify Health",true);
             builder.pop();
             //Black List
             builder.comment("Black List Entities that will not be resized.").comment("E.g.[\"minecraft:pig\",\"minecraft:cat\"]").push("blacklist");
