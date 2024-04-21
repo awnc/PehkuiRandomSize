@@ -5,6 +5,7 @@ import net.minecraft.world.entity.Mob;
 
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
+import org.checkerframework.checker.units.qual.C;
 import virtuoel.pehkui.api.*;
 
 import net.minecraft.world.entity.LivingEntity;
@@ -20,11 +21,8 @@ public class Utils {
     private static final UUID MODIFIER_ID_HEALTH = UUID.fromString("c0bef565-35f6-4dc5-bb4c-3644c382e6ce");
 
 
-    public static void modifyScale(Mob living,float min,float max)
+    public static void modifyScale(Mob living,float size)
     {
-
-        var random = new Random();
-        float size = random.nextFloat(min,max);
         ScaleTypes.MOTION.getScaleData(living).setScale(1/size);
         ScaleTypes.ATTACK_SPEED.getScaleData(living).setScale(1/size);
         if(Config.modifyHealth) {
@@ -35,6 +33,7 @@ public class Utils {
             }
         ScaleTypes.BASE.getScaleData(living).setScaleTickDelay(0);
         ScaleTypes.BASE.getScaleData(living).setTargetScale(size);
+
     }
     //Increase Max Health.Code refers to Scaling Health
     public static void setModifier(LivingEntity entity, Attribute attribute, UUID uuid, String name, double amount, AttributeModifier.Operation op) {
@@ -57,9 +56,12 @@ public class Utils {
         } else if (entity.getHealth() > newMax) {
             entity.setHealth((float) newMax);
         }
-
-
     }
 
+    public static float getSize()
+    {
+        var rnd = new Random();
+        return rnd.nextFloat((float)Config.minLimit, (float)Config.maxLimit);
+    }
 
 }

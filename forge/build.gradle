@@ -24,6 +24,7 @@ repositories {
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
     modCompileOnly "curse.maven:pehkui-319596:4684387"
+    //implementation fg.deobf("curse.maven:jade-324717:4801177")
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }

@@ -8,7 +8,9 @@ public class ConfigLoder {
         Config.maxLimit=ConfigSpec.commonConf.maxLimit.get();
         Config.minLimit=ConfigSpec.commonConf.minLimit.get();
         Config.modifyHealth=ConfigSpec.commonConf.modifyHealth.get();
+        Config.increaseDrop=ConfigSpec.commonConf.increaseDrop.get();
         Config.blackList=ConfigSpec.commonConf.blackList.get();
+        Config.blackListType=ConfigSpec.commonConf.blackListType.get();
         Config.onlyEnemyMob=ConfigSpec.commonConf.onlyEnemyMob.get();
     }
 }
