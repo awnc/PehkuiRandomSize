@@ -26,10 +26,13 @@ public class Utils {
         ScaleTypes.MOTION.getScaleData(living).setScale(1/size);
         ScaleTypes.ATTACK_SPEED.getScaleData(living).setScale(1/size);
         if(Config.modifyHealth) {
-            if(size>1) Utils.setMaxHealth(living, living.getMaxHealth()*size,AttributeModifier.Operation.ADDITION );
-            else {ScaleTypes.HEALTH.getScaleData(living).setScaleTickDelay(0);
-                ScaleTypes.HEALTH.getScaleData(living).setTargetScale(size);
-                living.setHealth(living.getMaxHealth()*size);}
+            //ScaleTypes.HEALTH.getScaleData(living).setScaleTickDelay(0);
+            //ScaleTypes.HEALTH.getScaleData(living).setTargetScale(size);
+            if(size>1) {
+                Utils.setMaxHealth(living, living.getMaxHealth() * size, AttributeModifier.Operation.ADDITION);
+            }
+            else {
+                Utils.setMaxHealth(living,living.getMaxHealth()*size,AttributeModifier.Operation.ADDITION);}
             }
         ScaleTypes.BASE.getScaleData(living).setScaleTickDelay(0);
         ScaleTypes.BASE.getScaleData(living).setTargetScale(size);
@@ -62,6 +65,14 @@ public class Utils {
     {
         var rnd = new Random();
         return rnd.nextFloat((float)Config.minLimit, (float)Config.maxLimit);
+    }
+
+    public static double getSizeNormal()
+    {
+        var rndN = new Random();
+        //double max=Config.maxLimit,min=Config.minLimit;
+        double size=rndN.nextGaussian()*Config.sizeStdDev+Config.meanSize;
+        if(size>5||size<0.20) return 1.0;else return size;
     }
 
 }
