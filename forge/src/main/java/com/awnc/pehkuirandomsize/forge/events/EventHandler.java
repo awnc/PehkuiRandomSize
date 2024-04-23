@@ -30,6 +30,7 @@ public class EventHandler {
     @SubscribeEvent
     public void onSpawnFinalized(MobSpawnEvent.FinalizeSpawn event) {
         Mob mob = event.getEntity();
+       float size=1;
         ResourceLocation id = Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(mob.getType()));
         boolean canResize=true;
         if(!Config.blackList.contains(id.toString()))
@@ -44,11 +45,13 @@ public class EventHandler {
             }
             if(canResize)
             {
+                if(Config.usingGaussianDistribution) size = (float) Utils.getSizeNormal();
+                else size=Utils.getSize();
                 if(Config.onlyEnemyMob)
                 {
-                    if (mob instanceof Enemy) Utils.modifyScale(mob, Utils.getSize());
+                    if (mob instanceof Enemy) Utils.modifyScale(mob, size);
                 }
-                else Utils.modifyScale(mob,Utils.getSize());
+                else Utils.modifyScale(mob,size);
             }
         }
     }

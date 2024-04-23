@@ -19,9 +19,15 @@ public class ConfigSpec {
     static class CommonConfigVals {
         public final ForgeConfigSpec.DoubleValue minLimit;
         public final ForgeConfigSpec.DoubleValue maxLimit;
+
+        public final ForgeConfigSpec.DoubleValue sizeMean;
+
+        public final ForgeConfigSpec.DoubleValue sizeStdDev;
         public final ForgeConfigSpec.BooleanValue modifyHealth;
 
         public final ForgeConfigSpec.BooleanValue increaseDrop;
+
+        public final ForgeConfigSpec.BooleanValue usingGaussianDistribution;
 
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> blackList;
 
@@ -48,7 +54,19 @@ public class ConfigSpec {
             builder.pop();
 
             builder.comment("Is increased drop by size.Small size will not be affected.").push("increaseDrop");
-            this.increaseDrop=builder.define("Increase Drop",true);
+            this.increaseDrop=builder.define("Increase Drop",false);
+            builder.pop();
+
+            builder.comment("If enabled,The size of Mobs will obey a normal distribution").comment("Size that greater than 5.0 or smaller than 0.20 will be set to 1.0").push("normalDistribution");
+            this.usingGaussianDistribution=builder.define("Normal Distribution",false);
+            builder.pop();
+
+            builder.comment("The mean value of size,using as a parameter of normal distribution").push("meanValue");
+            this.sizeMean=builder.defineInRange("Size Mean",1.0,0,100);
+            builder.pop();
+
+            builder.comment("The standard deviation of size,using as a parameter of normal distribution").push("standardDeviation");
+            this.sizeStdDev=builder.defineInRange("Standard Deviation",1.0,0,100);
             builder.pop();
 
             //Black List
