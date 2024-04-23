@@ -72,7 +72,7 @@ public class Utils {
         var rndN = new Random();
         //double max=Config.maxLimit,min=Config.minLimit;
         double size=rndN.nextGaussian()*Config.sizeStdDev+Config.meanSize;
-        if(size>5||size<0.20) return 1.0;else return size;
+        if(size>5||size<0.25) return 1.0;else return size;
     }
 
 }
