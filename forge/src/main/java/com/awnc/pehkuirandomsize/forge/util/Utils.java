@@ -32,7 +32,7 @@ public class Utils {
                 Utils.setMaxHealth(living, living.getMaxHealth() * size, AttributeModifier.Operation.ADDITION);
             }
             else {
-                Utils.setMaxHealth(living,living.getMaxHealth()*size,AttributeModifier.Operation.ADDITION);}
+                Utils.setMaxHealth(living,-living.getMaxHealth()*(1-size),AttributeModifier.Operation.ADDITION);}
             }
         ScaleTypes.BASE.getScaleData(living).setScaleTickDelay(0);
         ScaleTypes.BASE.getScaleData(living).setTargetScale(size);
@@ -57,7 +57,7 @@ public class Utils {
             float healAmount = (float) (newMax - oldMax);
             entity.heal(healAmount);
         } else if (entity.getHealth() > newMax) {
-            entity.setHealth((float) newMax);
+            entity.setHealth((int) Math.ceil((newMax)));
         }
     }
 
@@ -67,12 +67,12 @@ public class Utils {
         return rnd.nextFloat((float)Config.minLimit, (float)Config.maxLimit);
     }
 
-    public static double getSizeNormal()
+    public static double getSizeGaussian()
     {
         var rndN = new Random();
         //double max=Config.maxLimit,min=Config.minLimit;
         double size=rndN.nextGaussian()*Config.sizeStdDev+Config.meanSize;
-        if(size>5||size<0.20) return 1.0;else return size;
+        if(size>5||size<0.25) return 1.0;else return size;
     }
 
 }

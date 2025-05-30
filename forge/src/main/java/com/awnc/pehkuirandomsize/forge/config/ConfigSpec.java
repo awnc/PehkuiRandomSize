@@ -13,7 +13,7 @@ public class ConfigSpec {
     public static final ForgeConfigSpec commonSpec;
     public static final CommonConfigVals commonConf;
 
-    private static ArrayList<String> defaultEntityType = new ArrayList<>();
+    private static final ArrayList<String> defaultEntityType = new ArrayList<>();
 
 
     static class CommonConfigVals {
@@ -46,7 +46,7 @@ public class ConfigSpec {
             builder.comment("Minimum size.Range (0,1)");
             this.minLimit=builder.defineInRange("Minimum size",0.75,0,1);
             builder.comment("Maximum size.Range (1,20)");
-            this.maxLimit=builder.defineInRange("Maximum size",1.5,1.0,20.0);
+            this.maxLimit=builder.defineInRange("Maximum size",2.0,1.0,20.0);
             builder.pop();
             //Is modify health
             builder.comment("Is modified Health").push("health");
@@ -66,7 +66,7 @@ public class ConfigSpec {
             builder.pop();
 
             builder.comment("The standard deviation of size,using as a parameter of normal distribution").push("standardDeviation");
-            this.sizeStdDev=builder.defineInRange("Standard Deviation",1.0,0,100);
+            this.sizeStdDev=builder.defineInRange("Standard Deviation",0.2,0,100);
             builder.pop();
 
             //Black List
