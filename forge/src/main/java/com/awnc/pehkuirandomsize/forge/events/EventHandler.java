@@ -45,7 +45,7 @@ public class EventHandler {
             }
             if(canResize)
             {
-                if(Config.usingGaussianDistribution) size = (float) Utils.getSizeNormal();
+                if(Config.usingGaussianDistribution) size = (float) Utils.getSizeGaussian();
                 else size=Utils.getSize();
                 if(Config.onlyEnemyMob)
                 {
@@ -59,6 +59,7 @@ public class EventHandler {
     public void onMobDropItem(LivingDropsEvent event)
     {
         //int dropAmount = event.getLootingLevel();
+
         if(Config.increaseDrop&&Utils.getSize()>1)
         {
             var itemEntities = event.getDrops();
@@ -70,7 +71,7 @@ public class EventHandler {
                 var epos= event.getEntity().blockPosition();
                 for(int i = 1; i<=Utils.getSize(); i++)
                 {
-                    world.addFreshEntity(new ItemEntity(world, epos.getX(), epos.getY()+1, epos.getZ(), itemStack));
+                    world.addFreshEntity(new ItemEntity(world, epos.getX(), epos.getY()+1, epos.getZ(), itemStack.copy()));
                 }
             }
         }
