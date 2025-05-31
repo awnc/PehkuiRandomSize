@@ -1,6 +1,7 @@
 package com.awnc.pehkuirandomsize.forge.util;
 import com.awnc.pehkuirandomsize.config.Config;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Mob;
 
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -35,8 +36,8 @@ public class Utils {
                 Utils.setMaxHealth(living,-living.getMaxHealth()*(1-size),AttributeModifier.Operation.ADDITION);}
             }
         ScaleTypes.BASE.getScaleData(living).setScaleTickDelay(0);
-        ScaleTypes.BASE.getScaleData(living).setTargetScale(size);
-
+        ScaleTypes.BASE.getScaleData(living).setTargetScale((float) Math.pow(size,1.0/3.0));
+        living.addTag("sized");
     }
     //Increase Max Health.Code refers to Scaling Health
     public static void setModifier(LivingEntity entity, Attribute attribute, UUID uuid, String name, double amount, AttributeModifier.Operation op) {
