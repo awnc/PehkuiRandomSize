@@ -32,7 +32,7 @@ public class EventHandler {
         Mob mob = event.getEntity();
        float size=1;
         ResourceLocation id = Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(mob.getType()));
-        boolean canResize=true;
+        boolean canResize= !mob.getTags().contains("sized");
         if(!Config.blackList.contains(id.toString()))
         {
             for(String type:Config.blackListType)

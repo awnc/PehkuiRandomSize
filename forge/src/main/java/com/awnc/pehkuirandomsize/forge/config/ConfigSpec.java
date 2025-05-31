@@ -46,7 +46,7 @@ public class ConfigSpec {
             builder.comment("Minimum size.Range (0,1)");
             this.minLimit=builder.defineInRange("Minimum size",0.75,0,1);
             builder.comment("Maximum size.Range (1,20)");
-            this.maxLimit=builder.defineInRange("Maximum size",2.0,1.0,20.0);
+            this.maxLimit=builder.defineInRange("Maximum size",4.0,1.0,20.0);
             builder.pop();
             //Is modify health
             builder.comment("Is modified Health").push("health");
