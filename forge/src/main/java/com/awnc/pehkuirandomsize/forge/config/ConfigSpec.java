@@ -11,6 +11,7 @@ import java.util.List;
 
 public class ConfigSpec {
     public static final ForgeConfigSpec commonSpec;
+
     public static final CommonConfigVals commonConf;
 
     private static final ArrayList<String> defaultEntityType = new ArrayList<>();
@@ -34,6 +35,8 @@ public class ConfigSpec {
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> blackListType;
 
         public final ForgeConfigSpec.BooleanValue onlyEnemyMob;
+
+        public final ForgeConfigSpec.BooleanValue increaseXp;
 
 
 
@@ -82,14 +85,25 @@ public class ConfigSpec {
             this.onlyEnemyMob=builder.define("Only Enemy Mob",false);
             builder.pop();
 
+            builder.comment("If enabled,the experience dropped by mob will be increased by size").push("increaseXP");
+            this.increaseXp=builder.define("increaseXp",true);
+            builder.pop();
+
         }
     }
+
+
+
+
 
     static {
         Pair<CommonConfigVals, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(CommonConfigVals::new);
         commonSpec = specPair.getRight();
         commonConf = specPair.getLeft();
         defaultEntityType.add("dragonmounts");
+
+
+
     }
 
 }

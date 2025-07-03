@@ -15,5 +15,6 @@ public class ConfigLoder {
         Config.blackList=ConfigSpec.commonConf.blackList.get();
         Config.blackListType=ConfigSpec.commonConf.blackListType.get();
         Config.onlyEnemyMob=ConfigSpec.commonConf.onlyEnemyMob.get();
+        Config.increaseDrop=ConfigSpec.commonConf.increaseXp.get();
     }
 }
