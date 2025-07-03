@@ -22,6 +22,8 @@ public class Config {
 
     public static boolean onlyEnemyMob;
 
+    public static boolean increaseXp;
+
 
 
 

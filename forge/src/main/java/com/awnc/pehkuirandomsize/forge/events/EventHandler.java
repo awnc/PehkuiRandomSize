@@ -5,6 +5,7 @@ import com.awnc.pehkuirandomsize.config.Config;
 import com.awnc.pehkuirandomsize.forge.util.Utils;
 
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 
 
@@ -13,9 +14,11 @@ import net.minecraft.world.entity.Mob;
 
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -58,24 +61,32 @@ public class EventHandler {
     @SubscribeEvent
     public void onMobDropItem(LivingDropsEvent event)
     {
-        //int dropAmount = event.getLootingLevel();
 
-        if(Config.increaseDrop&&Utils.getSize()>1)
-        {
-            var itemEntities = event.getDrops();
-            for(ItemEntity itemEntity:itemEntities)
-            {
-                ItemStack itemStack = itemEntity.getItem();
-                //itemStack.copyWithCount(5);//(int) (rnd.nextFloat((float) Config.minLimit, (float) Config.maxLimit))+1);
-                Level world = event.getEntity().level();
-                var epos= event.getEntity().blockPosition();
-                for(int i = 1; i<=Utils.getSize(); i++)
-                {
-                    world.addFreshEntity(new ItemEntity(world, epos.getX(), epos.getY()+1, epos.getZ(), itemStack.copy()));
+        if (!(event.getEntity() instanceof Player))
+        {//不为玩家时增加实体掉落物
+            if (Config.increaseDrop && Utils.getSize() > 1) {
+                var itemEntities = event.getDrops();
+                for (ItemEntity itemEntity : itemEntities) {
+                    ItemStack itemStack = itemEntity.getItem();
+                    //itemStack.copyWithCount(5);//(int) (rnd.nextFloat((float) Config.minLimit, (float) Config.maxLimit))+1);
+                    Level world = event.getEntity().level();
+                    var epos = event.getEntity().blockPosition();
+                    for (int i = 1; i <= Utils.getSize(); i++) {
+                        world.addFreshEntity(new ItemEntity(world, epos.getX(), epos.getY() + 1, epos.getZ(), itemStack.copy()));
+                    }
                 }
             }
         }
+
     }
+    @SubscribeEvent
+    public void onMobDropXp(LivingExperienceDropEvent event)
+    {
+        if(Config.increaseXp) {
+            event.setDroppedExperience((int) (event.getOriginalExperience() * Utils.getSize()));
+        }
+    }
+
     public EventHandler()
     {
     }

@@ -26,6 +26,7 @@ public class PehkuiRandomSizeForge {
         MinecraftForge.EVENT_BUS.register(handler);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigSpec.commonSpec,"pehkuirandomsize.toml");
+        //ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON,,"");
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(PehkuiRandomSizeForge::conf);
     }
